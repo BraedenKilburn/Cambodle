@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="game">
+    <MapImage />
+    <GuessList />
+    <GuessSubmission />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import MapImage from "@/components/MapImage.vue";
+import GuessList from "@/components/GuessList.vue";
+import GuessSubmission from "@/components/GuessSubmission.vue";
 
 export default {
   name: "HomeView",
   components: {
-    HelloWorld,
+    MapImage,
+    GuessList,
+    GuessSubmission,
   },
 };
 </script>
+
+<style scoped>
+.game {
+  width: 100%;
+  max-width: var(--game-max-width);
+  margin: 0 auto;
+  height: calc(100% - var(--header-height));
+  display: flex;
+  flex-direction: column;
+}
+</style>
