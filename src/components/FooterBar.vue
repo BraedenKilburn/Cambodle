@@ -4,7 +4,7 @@
       href="https://github.com/BraedenKilburn/Cambodle"
       target="_blank"
       rel="noopener noreferrer"
-      class="col-md-6 d-flex align-items-center mb-sm-3 mb-md-0 text-decoration-none"
+      class="d-flex align-items-center mb-sm-3 mb-md-0 text-decoration-none"
     >
       <i class="fab fa-github"></i>
       <p class="pl-5 mb-0">Created by Braeden Kilburn</p>
@@ -14,7 +14,6 @@
 
 <style scoped>
 footer {
-  position: absolute;
   bottom: 0;
   width: 100%;
   z-index: 1000;
