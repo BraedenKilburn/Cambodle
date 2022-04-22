@@ -1,4 +1,4 @@
-# cambodle
+# Cambodle
 
 ## Project setup
 ```
