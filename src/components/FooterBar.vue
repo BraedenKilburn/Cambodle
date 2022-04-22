@@ -1,7 +1,7 @@
 <template>
   <footer class="d-flex justify-content-start align-items-center">
     <a
-      href="https://github.com/BraedenKilburn/vue-weather"
+      href="https://github.com/BraedenKilburn/Cambodle"
       target="_blank"
       rel="noopener noreferrer"
       class="col-md-6 d-flex align-items-center mb-sm-3 mb-md-0 text-decoration-none"
