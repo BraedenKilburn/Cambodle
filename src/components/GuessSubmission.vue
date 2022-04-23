@@ -10,7 +10,7 @@
           :fields="fields"
           name="guess"
         ></ejs-combobox>
-        <button type="submit" class="btn btn-outline-dark mt-3">
+        <button type="submit" id="submitBtn" class="btn btn-outline-dark mt-3">
           <span>&#127472;&#127469; Submit Guess</span>
         </button>
       </div>
@@ -43,6 +43,9 @@ export default {
 
       if (this.guessedProvince === this.$parent.province.name) {
         this.$parent.solved = true;
+        document.getElementById("combobox").disabled = true;
+        document.getElementById("submitBtn").disabled = true;
+
         var confettiElement = document.getElementById("game");
         var confettiSettings = { target: confettiElement };
         var confetti = new ConfettiGenerator(confettiSettings);
