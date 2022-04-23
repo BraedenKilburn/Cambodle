@@ -1,7 +1,7 @@
 <template>
   <div class="map">
     <img
-      :src="require(`@/assets/images/${src}_empty.png`)"
+      :src="require(`@/assets/images/${src}_${solved}.png`)"
       alt="Cambodia Map"
     />
   </div>
@@ -12,6 +12,7 @@ export default {
   name: "MapImage",
   props: {
     src: String,
+    solved: String,
   },
 };
 </script>

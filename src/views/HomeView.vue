@@ -1,7 +1,7 @@
 <template>
   <div class="game">
-    <MapImage :src="this.province.imgsrc" />
-    <GuessList :number-of-guesses="guessCount" />
+    <MapImage :src="this.province.imgsrc" :solved="isSolved()" />
+    <GuessList />
     <GuessSubmission />
   </div>
 </template>
@@ -24,11 +24,15 @@ export default {
       guessCount: 0,
       guessedProvince: [],
       province: this.getProvince(),
+      solved: false,
     };
   },
   methods: {
     getProvince() {
       return Provinces.provinces.at(new Date().getDate() % 25);
+    },
+    isSolved() {
+      return this.solved ? "answer" : "empty";
     },
   },
 };

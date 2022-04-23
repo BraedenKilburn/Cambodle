@@ -1,9 +1,9 @@
 <template>
   <div class="guesses">
     <GuessRow
-      v-for="i in numberOfGuesses"
-      :key="i"
-      :guessed-province="guessedProvinces.at(i)"
+      v-for="guess in this.$parent.guessedProvince"
+      :key="guess"
+      :guessed-province="guess"
     />
   </div>
 </template>
@@ -12,10 +12,6 @@
 import GuessRow from "./GuessRow.vue";
 
 export default {
-  props: {
-    numberOfGuesses: Number,
-    guessedProvinces: [],
-  },
   data() {
     return {};
   },

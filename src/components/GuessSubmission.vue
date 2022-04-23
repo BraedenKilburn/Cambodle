@@ -1,5 +1,5 @@
 <template>
-  <div class="guess">
+  <div class="guessSubmission">
     <form @submit.prevent="makeGuess">
       <div class="flex flex-col">
         <ejs-combobox
@@ -21,6 +21,7 @@
 <script>
 import { ComboBoxComponent } from "@syncfusion/ej2-vue-dropdowns";
 import Provinces from "@/assets/data/provinces.json";
+import ConfettiGenerator from "confetti-js";
 
 export default {
   name: "GuessSubmission",
@@ -40,9 +41,16 @@ export default {
       this.$parent.guessedProvince.push(this.guessedProvince);
       this.$parent.guessCount += 1;
 
-      if (this.guessedProvince === this.$parent.province.name)
-        console.log("Correct!");
-      else console.log("Wrong!");
+      if (this.guessedProvince === this.$parent.province.name) {
+        this.$parent.solved = true;
+        var confettiElement = document.getElementById("game");
+        var confettiSettings = { target: confettiElement };
+        var confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+        setTimeout(() => {
+          confetti.clear();
+        }, 3000);
+      }
     },
   },
 };
@@ -53,7 +61,7 @@ export default {
 @import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-vue-dropdowns/styles/material.css";
 
-.guess {
+.guessSubmission {
   margin: 10px 55px;
 }
 

@@ -14,6 +14,7 @@
     "@syncfusion/ej2-base": "^20.1.50",
     "@syncfusion/ej2-vue-base": "^20.1.49",
     "@syncfusion/ej2-vue-dropdowns": "^20.1.50",
+    "confetti-js": "^0.0.18",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-rc.1",
