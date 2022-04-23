@@ -1,29 +1,104 @@
 {
     "provinces": [
-        "Banteay Meanchey",
-        "Battambang",
-        "Kampong Cham",
-        "Kampong Chhnang",
-        "Kampong Speu",
-        "Kampong Thom",
-        "Kampot",
-        "Kandal",
-        "Koh Kong",
-        "Kratie",
-        "Mondulkiri",
-        "Phnom Penh",
-        "Preah Vihear",
-        "Prey Veng",
-        "Pursat",
-        "Ratanakiri",
-        "Siem Reap",
-        "Preah Sihanouk",
-        "Stung Treng",
-        "Svay Rieng",
-        "Takeo",
-        "Oddar Meanchey",
-        "Kep",
-        "Pailin",
-        "Tboung Khmum"
+        {
+            "name": "Oddar Meanchey",
+            "imgsrc": "oddar_meanchey"
+        },
+        {
+            "name": "Ratanakiri",
+            "imgsrc": "ratanakiri"
+        },
+        {
+            "name": "Kampong Speu",
+            "imgsrc": "kampong_speu"
+        },
+        {
+            "name": "Phnom Penh",
+            "imgsrc": "phnom_penh"
+        },
+        {
+            "name": "Banteay Meanchey",
+            "imgsrc": "banteay_meanchey"
+        },
+        {
+            "name": "Kampong Chhnang",
+            "imgsrc": "kampong_chhnang"
+        },
+        {
+            "name": "Koh Kong",
+            "imgsrc": "koh_kong"
+        },
+        {
+            "name": "Stung Treng",
+            "imgsrc": "stung_treng"
+        },
+        {
+            "name": "Siem Reap",
+            "imgsrc": "siem_reap"
+        },
+        {
+            "name": "Battambang",
+            "imgsrc": "battambang"
+        },
+        {
+            "name": "Pailin",
+            "imgsrc": "pailin"
+        },
+        {
+            "name": "Tboung Khmum",
+            "imgsrc": "tboung_khmum"
+        },
+        {
+            "name": "Preah Sihanouk",
+            "imgsrc": "preah_sihanouk"
+        },
+        {
+            "name": "Kandal",
+            "imgsrc": "kandal"
+        },
+        {
+            "name": "Preah Vihear",
+            "imgsrc": "preah_vihear"
+        },
+        {
+            "name": "Svay Rieng",
+            "imgsrc": "svay_rieng"
+        },
+        {
+            "name": "Takeo",
+            "imgsrc": "takeo"
+        },
+        {
+            "name": "Kampong Cham",
+            "imgsrc": "kampong_cham"
+        },
+        {
+            "name": "Mondulkiri",
+            "imgsrc": "mondulkiri"
+        },
+        {
+            "name": "Kep",
+            "imgsrc": "kep"
+        },
+        {
+            "name": "Pursat",
+            "imgsrc": "pursat"
+        },
+        {
+            "name": "Kampot",
+            "imgsrc": "kampot"
+        },
+        {
+            "name": "Kampong Thom",
+            "imgsrc": "kampong_thom"
+        },
+        {
+            "name": "Prey Veng",
+            "imgsrc": "prey_veng"
+        },
+        {
+            "name": "Kratie",
+            "imgsrc": "kratie"
+        }
     ]
 }

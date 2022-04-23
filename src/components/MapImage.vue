@@ -1,8 +1,8 @@
 <template>
   <div class="map">
     <img
-      srcset="@/assets/images/kampongCham_revealed.png"
-      alt="Kampong Cham Province"
+      :src="require(`@/assets/images/${src}_empty.png`)"
+      alt="Cambodia Map"
     />
   </div>
 </template>
@@ -10,6 +10,9 @@
 <script>
 export default {
   name: "MapImage",
+  props: {
+    src: String,
+  },
 };
 </script>
 

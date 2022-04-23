@@ -1,12 +1,14 @@
 <template>
   <div class="guess">
-    <form action="">
+    <form @submit.prevent="makeGuess">
       <div class="flex flex-col">
         <ejs-combobox
           id="combobox"
           :dataSource="provinces"
           placeholder="Guess the province (e.g., Phnom Penh)"
           allowFiltering="true"
+          :fields="fields"
+          name="guess"
         ></ejs-combobox>
         <button type="submit" class="btn btn-outline-dark mt-3">
           <span>&#127472;&#127469; Submit Guess</span>
@@ -27,8 +29,21 @@ export default {
   },
   data() {
     return {
+      guessedProvince: "",
       provinces: Provinces.provinces,
+      fields: { text: "name", value: "name" },
     };
+  },
+  methods: {
+    makeGuess(submitEvent) {
+      this.guessedProvince = submitEvent.target.elements.guess.value;
+      this.$parent.guessedProvince.push(this.guessedProvince);
+      this.$parent.guessCount += 1;
+
+      if (this.guessedProvince === this.$parent.province.name)
+        console.log("Correct!");
+      else console.log("Wrong!");
+    },
   },
 };
 </script>

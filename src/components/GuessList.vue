@@ -3,7 +3,7 @@
     <GuessRow
       v-for="i in numberOfGuesses"
       :key="i"
-      guessed-province="Kampong Thom"
+      :guessed-province="guessedProvinces.at(i)"
     />
   </div>
 </template>
@@ -12,10 +12,12 @@
 import GuessRow from "./GuessRow.vue";
 
 export default {
+  props: {
+    numberOfGuesses: Number,
+    guessedProvinces: [],
+  },
   data() {
-    return {
-      numberOfGuesses: 6,
-    };
+    return {};
   },
   components: {
     GuessRow,

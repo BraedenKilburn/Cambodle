@@ -1,7 +1,7 @@
 <template>
   <div class="game">
-    <MapImage />
-    <GuessList />
+    <MapImage :src="this.province.imgsrc" />
+    <GuessList :number-of-guesses="guessCount" />
     <GuessSubmission />
   </div>
 </template>
@@ -10,6 +10,7 @@
 import MapImage from "@/components/MapImage.vue";
 import GuessList from "@/components/GuessList.vue";
 import GuessSubmission from "@/components/GuessSubmission.vue";
+import Provinces from "@/assets/data/provinces.json";
 
 export default {
   name: "HomeView",
@@ -17,6 +18,18 @@ export default {
     MapImage,
     GuessList,
     GuessSubmission,
+  },
+  data() {
+    return {
+      guessCount: 0,
+      guessedProvince: [],
+      province: this.getProvince(),
+    };
+  },
+  methods: {
+    getProvince() {
+      return Provinces.provinces.at(new Date().getDate() % 25);
+    },
   },
 };
 </script>
