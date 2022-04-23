@@ -28,6 +28,9 @@ export default {
   components: {
     "ejs-combobox": ComboBoxComponent,
   },
+  props: {
+    continuePlaying: Boolean,
+  },
   data() {
     return {
       guessedProvince: "",
@@ -43,8 +46,7 @@ export default {
 
       if (this.guessedProvince === this.$parent.province.name) {
         this.$parent.solved = true;
-        document.getElementById("combobox").disabled = true;
-        document.getElementById("submitBtn").disabled = true;
+        this.turnOffForm();
 
         var confettiElement = document.getElementById("game");
         var confettiSettings = { target: confettiElement };
@@ -54,6 +56,14 @@ export default {
           confetti.clear();
         }, 3000);
       }
+
+      if (this.$parent.guessCount === 6) {
+        this.turnOffForm();
+      }
+    },
+    turnOffForm() {
+      document.getElementById("combobox").disabled = true;
+      document.getElementById("submitBtn").disabled = true;
     },
   },
 };
