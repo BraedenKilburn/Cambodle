@@ -1,0 +1,104 @@
+{
+    "provinces": [
+        {
+            "name": "Banteay Meanchey",
+            "imgsrc": "banteay_meanchey"
+        },
+        {
+            "name": "Battambang",
+            "imgsrc": "battambang"
+        },
+        {
+            "name": "Kampong Cham",
+            "imgsrc": "kampong_cham"
+        },
+        {
+            "name": "Kampong Chhnang",
+            "imgsrc": "kampong_chhnang"
+        },
+        {
+            "name": "Kampong Speu",
+            "imgsrc": "kampong_speu"
+        },
+        {
+            "name": "Kampong Thom",
+            "imgsrc": "kampong_thom"
+        },
+        {
+            "name": "Kampot",
+            "imgsrc": "kampot"
+        },
+        {
+            "name": "Kandal",
+            "imgsrc": "kandal"
+        },
+        {
+            "name": "Kep",
+            "imgsrc": "kep"
+        },
+        {
+            "name": "Koh Kong",
+            "imgsrc": "koh_kong"
+        },
+        {
+            "name": "Kratie",
+            "imgsrc": "kratie"
+        },
+        {
+            "name": "Mondulkiri",
+            "imgsrc": "mondulkiri"
+        },
+        {
+            "name": "Oddar Meanchey",
+            "imgsrc": "oddar_meanchey"
+        },
+        {
+            "name": "Pailin",
+            "imgsrc": "pailin"
+        },
+        {
+            "name": "Phnom Penh",
+            "imgsrc": "phnom_penh"
+        },
+        {
+            "name": "Preah Sihanouk",
+            "imgsrc": "preah_sihanouk"
+        },
+        {
+            "name": "Preah Vihear",
+            "imgsrc": "preah_vihear"
+        },
+        {
+            "name": "Prey Veng",
+            "imgsrc": "prey_veng"
+        },
+        {
+            "name": "Pursat",
+            "imgsrc": "pursat"
+        },
+        {
+            "name": "Ratanakiri",
+            "imgsrc": "ratanakiri"
+        },
+        {
+            "name": "Siem Reap",
+            "imgsrc": "siem_reap"
+        },
+        {
+            "name": "Stung Treng",
+            "imgsrc": "stung_treng"
+        },
+        {
+            "name": "Svay Rieng",
+            "imgsrc": "svay_rieng"
+        },
+        {
+            "name": "Takeo",
+            "imgsrc": "takeo"
+        },
+        {
+            "name": "Tboung Khmum",
+            "imgsrc": "tboung_khmum"
+        }
+    ]
+}

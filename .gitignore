@@ -2,6 +2,8 @@
 node_modules
 /dist
 
+# Don't give away the order of the answers
+src/assets/data/random_provinces.json
 
 # local env files
 .env.local

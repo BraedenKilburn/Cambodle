@@ -20,7 +20,7 @@
 
 <script>
 import { ComboBoxComponent } from "@syncfusion/ej2-vue-dropdowns";
-import Provinces from "@/assets/data/provinces.json";
+import Provinces from "@/assets/data/ordered_provinces.json";
 import ConfettiGenerator from "confetti-js";
 
 export default {

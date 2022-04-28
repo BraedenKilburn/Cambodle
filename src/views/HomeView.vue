@@ -12,7 +12,7 @@ import MapImage from "@/components/MapImage.vue";
 import PrintOutcome from "@/components/PrintOutcome.vue";
 import GuessList from "@/components/GuessList.vue";
 import GuessSubmission from "@/components/GuessSubmission.vue";
-import Provinces from "@/assets/data/provinces.json";
+import Provinces from "@/assets/data/random_provinces.json";
 
 export default {
   name: "HomeView",
