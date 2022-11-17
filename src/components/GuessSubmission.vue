@@ -1,50 +1,42 @@
 <template>
   <div class="guessSubmission">
-    <form @submit.prevent="makeGuess">
-      <div class="flex flex-col">
-        <ejs-combobox
-          id="combobox"
-          :dataSource="provinces"
-          placeholder="Guess the province (e.g., Phnom Penh)"
-          allowFiltering="true"
-          :fields="fields"
-          name="guess"
-        ></ejs-combobox>
-        <button type="submit" id="submitBtn" class="btn btn-outline-dark mt-3">
-          <span>&#127472;&#127469; Submit Guess</span>
-        </button>
-      </div>
-    </form>
+    <v-combobox
+      v-model="guess"
+      id="combobox"
+      label="Guess the province (e.g., Phnom Penh)"
+      :items="provinces"
+      variant="underlined"
+      :disabled="disabled"
+    />
+    <v-btn :disabled="disabled" @click="makeGuess"
+      >&#127472;&#127469; Submit Guess</v-btn
+    >
   </div>
 </template>
 
 <script>
-import { ComboBoxComponent } from "@syncfusion/ej2-vue-dropdowns";
 import Provinces from "@/assets/data/ordered_provinces.json";
 import ConfettiGenerator from "confetti-js";
 
 export default {
   name: "GuessSubmission",
-  components: {
-    "ejs-combobox": ComboBoxComponent,
-  },
   props: {
     continuePlaying: Boolean,
   },
   data() {
     return {
-      guessedProvince: "",
-      provinces: Provinces.provinces,
+      guess: "",
+      disabled: false,
+      provinces: Provinces,
       fields: { text: "name", value: "name" },
     };
   },
   methods: {
-    makeGuess(submitEvent) {
-      this.guessedProvince = submitEvent.target.elements.guess.value;
-      this.$parent.guessedProvince.push(this.guessedProvince);
+    makeGuess() {
+      this.$parent.guessedProvince.push(this.guess);
       this.$parent.guessCount += 1;
 
-      if (this.guessedProvince === this.$parent.province.name) {
+      if (this.guess === this.$parent.province.name) {
         this.$parent.solved = true;
         this.turnOffForm();
 
@@ -58,12 +50,8 @@ export default {
       }
 
       if (this.$parent.guessCount === 6) {
-        this.turnOffForm();
+        this.disabled = true;
       }
-    },
-    turnOffForm() {
-      document.getElementById("combobox").disabled = true;
-      document.getElementById("submitBtn").disabled = true;
     },
   },
 };
