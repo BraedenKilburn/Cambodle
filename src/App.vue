@@ -1,53 +1,51 @@
 <template>
-  <NavBar />
-  <router-view />
-  <canvas id="game" />
-  <Footer />
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer">
+      <!--  -->
+    </v-navigation-drawer>
+
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title class="title">Cambodle</v-toolbar-title>
+
+      <div class="menu-right">
+        <v-icon class="mr-3" icon="mdi-help-circle-outline" />
+        <v-icon class="mr-3" icon="mdi-poll" />
+        <v-icon class="mr-3" icon="mdi-cog" />
+      </div>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+
+    <FooterBar />
+  </v-app>
 </template>
 
-<script>
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/FooterBar.vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import FooterBar from "@/components/FooterBar.vue";
 
-export default {
+export default defineComponent({
   components: {
-    NavBar,
-    Footer,
+    FooterBar,
   },
-};
+  data: () => ({ 
+    drawer: false,
+  }),
+});
 </script>
 
-<style>
-@import "./assets/styles/variables.css";
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style scoped>
+.title {
+  font-family: "nyt-karnakcondensed";
+  font-weight: 700;
+  font-size: 37px;
+  line-height: 100%;
+  letter-spacing: 0.01em;
   text-align: center;
-  color: #2c3e50;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-.game {
-  flex: 1;
-}
-
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
   pointer-events: none;
-
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
 }
 </style>

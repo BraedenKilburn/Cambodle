@@ -1,47 +1,37 @@
 <template>
-  <div class="row" :class="{ green: correctAnswer, red: wrongAnswer }">
-    <div class="col" :class="{ green: correctAnswer, red: wrongAnswer }">
-      <i v-if="this.wrongAnswer" class="fa-solid fa-xmark fa-xl"></i>
-      <i v-else class="fa-solid fa-check fa-lg"></i>
-      {{ guessedProvince }}
-    </div>
+  <div class="row" :class="{ green: correctAnswer, red: !correctAnswer }">
+    <v-icon v-if="correctAnswer" class="mr-2" icon="mdi-check-circle-outline" color="white" />
+    <v-icon v-else class="mr-2" icon="mdi-alpha-x-circle-outline" color="error" />
+    {{ guessedProvince }}
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      correctAnswer: false,
-      wrongAnswer: false,
-    };
-  },
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   props: {
+    answer: String,
     guessedProvince: String,
   },
-  created() {
-    if (this.guessedProvince === this.$parent.$parent.province.name) {
-      this.correctAnswer = true;
-    } else {
-      this.wrongAnswer = true;
-    }
+  computed: {
+    correctAnswer() {
+      return this.guessedProvince === this.answer;
+    },
   },
-};
+});
 </script>
 
 <style scoped>
 .row {
+  display: flex;
+  align-items: center;
   background-color: #ccc6;
   height: 2rem;
   outline: solid black 2px;
-  margin: 10px 55px;
+  padding: 0 45px;
   border-radius: 0.25rem;
-}
-
-.col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 10px;
 }
 
 .green {
@@ -53,15 +43,5 @@ export default {
 
 .red {
   background-color: var(--softRed);
-}
-
-i.fa-solid.fa-xmark {
-  margin-right: 0.5rem;
-  color: var(--hardRed);
-}
-
-i.fa-solid.fa-check {
-  margin-right: 0.5rem;
-  color: white;
 }
 </style>

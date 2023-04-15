@@ -8,8 +8,6 @@ Every day, the highlighted province changes and gives the player a new opportuni
 
 ## Todo
 
-- Safari `border-radius` appears to not work on the GuessList rows
-- The combobox needs to be shuffled as to avoid revealing the order of the provinces in rotation (otherwise, knowing yesterday's province will reveal today's province because the combobox is ordered the same as the answer array)
 - There needs to be a way to show the user they've got six guesses
   - We could possibly add six empty rows to our GuessList and then update them as the user guesses
   - We could put a counter that says "Guesses Remaining"
@@ -18,3 +16,5 @@ Every day, the highlighted province changes and gives the player a new opportuni
   - We could put a hard mode with no combobox or lower guess allowance
   - We definitely need a help page to explain the game
 - A leaderboard or statistics metric should be kept
+- Add basic unit tests
+- Implement user profiles to maintain stats
