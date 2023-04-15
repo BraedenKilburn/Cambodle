@@ -2,7 +2,7 @@
   <v-container class="game-container d-flex flex-column align-center pt-0">
     <img :src="imageSrc" alt="Cambodia Map">
 
-    <div v-if="gameStatus.outcome" class="game-results">
+    <div v-if="gameStatus.gameOver" class="game-results">
       <span> {{ gameStatus.outcome }} </span>
       <p>
         Correct Answer: {{ answer.name }}
@@ -26,7 +26,7 @@
         label="Guess the province (e.g., Phnom Penh)"
         variant="underlined"
         :items="provinces"
-        :disabled="disabled"
+        :disabled="guessCount === 6 || solved"
       />
       <v-btn color="success" :disabled="disabled" @click="makeGuess"
         >&#127472;&#127469; Submit Guess</v-btn
@@ -35,10 +35,18 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
 import GuessRow from "@/components/GuessRow.vue";
 import Provinces from "@/assets/data/ordered_provinces.json";
 import RandomizedProvinces from "@/assets/data/random_provinces.json";
+
+interface IGameViewData {
+  guessCount: number;
+  guessedProvince: string[];
+  guess: string | null;
+  solved: boolean;
+  provinces: string[];
+}
 
 export default {
   name: "GameView",
@@ -50,15 +58,18 @@ export default {
       guessCount: 0,
       guessedProvince: [],
       guess: null,
-      disabled: false,
       solved: false,
-      provinces: Provinces,
+      provinces: Provinces as string[],
     };
   },
   computed: {
     answer() {
       const index = new Date().getDate() % 25;
       return RandomizedProvinces.provinces[index];
+    },
+    disabled() {
+      if (!this.guess) return true;
+      return this.guessedProvince.includes(this.guess);
     },
     gameStatus() {
       return {
@@ -69,16 +80,17 @@ export default {
     imageSrc() {
       const provinceName = this.answer.imgSrc;
       const imageType = this.gameStatus.gameOver ? "answer" : "empty";
-      return new URL(`/src/assets/images/${provinceName}_${imageType}.png`, import.meta.url)
+      return new URL(`/src/assets/images/${provinceName}_${imageType}.png`, import.meta.url).toString();
     },
   },
   methods: {
     makeGuess() {
+      if (!this.guess) return;
+
       this.guessedProvince.push(this.guess);
       this.guessCount = this.guessedProvince.length;
       
       this.solved = (this.guess === this.answer.name && this.guessCount !== 6) ? true : false;
-      this.disabled = this.solved;
     },
   },
 };
