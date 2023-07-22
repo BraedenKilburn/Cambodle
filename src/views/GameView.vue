@@ -39,7 +39,7 @@ export default {
     gameStatus() {
       return {
         gameOver: this.solved || this.guessCount === this.guessesAllowed,
-        outcome: this.guessCount === this.guessesAllowed ? "Game Over" : "",
+        outcome: this.guessCount === this.guessesAllowed ? "Game Over" : "You Win!",
       };
     },
     imageSrc() {
@@ -66,7 +66,7 @@ export default {
     <img :src="imageSrc" alt="Cambodia Map">
 
     <div v-if="gameStatus.gameOver" class="game-results">
-      <span> {{ gameStatus.outcome }} </span>
+      <span :class="{correct: solved}"> {{ gameStatus.outcome }} </span>
       <p>
         Correct Answer: {{ answer.name }}
       </p>
@@ -114,6 +114,11 @@ img {
 
   span {
     color: red;
+
+    &.correct {
+      color: green;
+    }
+    
     font-weight: bold;
     font-size: 2rem;
   }
