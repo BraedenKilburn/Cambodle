@@ -62,38 +62,40 @@ export default {
 </script>
 
 <template>
-  <v-container class="game-container d-flex flex-column align-center pt-0">
-    <img :src="imageSrc" alt="Cambodia Map">
-
-    <div v-if="gameStatus.gameOver" class="game-results">
-      <span :class="{correct: solved}"> {{ gameStatus.outcome }} </span>
-      <p>
-        Correct Answer: {{ answer.name }}
-      </p>
+  <v-container class="game-container">
+    <div class="image-container">
+      <img :src="imageSrc" alt="Cambodia Map">
     </div>
 
-    <div class="guesses">
-      <GuessRow
-        v-for="(guess, index) in guessedProvince"
-        :key="index"
-        :answer="answer.name"
-        :guessed-province="guess"
-      />
-    </div>
-
-    <div class="guess-submission mt-4">
-      <v-combobox
-        clearable
-        v-model="guess"
-        id="combobox"
-        label="Guess the province (e.g., Phnom Penh)"
-        variant="underlined"
-        :items="provinces"
-        :disabled="guessCount === guessesAllowed || solved"
-      />
-      <v-btn color="success" :disabled="disabled" @click="makeGuess"
-        >&#127472;&#127469; Submit Guess</v-btn
-      >
+    <div class="gameplay-container">
+      <div v-if="gameStatus.gameOver" class="game-results">
+        <span :class="{correct: solved}"> {{ gameStatus.outcome }} </span>
+        <p>
+          Correct Answer: {{ answer.name }}
+        </p>
+      </div>
+      <div class="guesses">
+        <GuessRow
+          v-for="(guess, index) in guessedProvince"
+          :key="index"
+          :answer="answer.name"
+          :guessed-province="guess"
+        />
+      </div>
+      <div class="guess-submission mt-4">
+        <v-combobox
+          clearable
+          v-model="guess"
+          id="combobox"
+          label="Guess the province (e.g., Phnom Penh)"
+          variant="underlined"
+          :items="provinces"
+          :disabled="guessCount === guessesAllowed || solved"
+        />
+        <v-btn color="success" :disabled="disabled" @click="makeGuess"
+          >&#127472;&#127469; Submit Guess</v-btn
+        >
+      </div>
     </div>
   </v-container>
 </template>
@@ -101,41 +103,71 @@ export default {
 <style scoped lang="scss">
 .game-container {
   --width: 90%;
-}
 
-img {
-  width: 300px;
-  aspect-ratio: 1 / 1;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0;
 
-.game-results {
-  text-align: center;
-  margin-bottom: 1.5rem;
+  .image-container {
+    margin-bottom: 10px;
 
-  span {
-    color: red;
-
-    &.correct {
-      color: green;
+    img {
+      width: 300px;
+      aspect-ratio: 1 / 1;
     }
-    
-    font-weight: bold;
-    font-size: 2rem;
   }
-}
 
-.guesses {
-  width: var(--width);
-}
+  .gameplay-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--width);
 
-.guess-submission {
-  width: var(--width);
-  text-align: center;
+    .game-results {
+      text-align: center;
+      margin-bottom: 1.5rem;
+
+      span {
+        color: red;
+
+        &.correct {
+          color: green;
+        }
+        
+        font-weight: bold;
+        font-size: 2rem;
+      }
+    }
+
+    .guesses {
+      width: var(--width);
+    }
+
+    .guess-submission {
+      width: var(--width);
+      text-align: center;
+    }
+  }
 }
 
 @media screen and (min-width: 600px) {
   .game-container {
     --width: 400px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .game-container {
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .image-container {
+      img {
+        width: 500px;
+      }
+    }
   }
 }
 </style>
