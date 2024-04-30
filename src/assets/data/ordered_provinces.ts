@@ -1,4 +1,4 @@
-[
+export default [
     "Banteay Meanchey",
     "Battambang",
     "Kampong Cham",

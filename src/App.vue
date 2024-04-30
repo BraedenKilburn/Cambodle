@@ -1,36 +1,17 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { ref } from "vue";
 import FooterBar from "@/components/FooterBar.vue";
 
-export default defineComponent({
-  components: {
-    FooterBar,
-  },
-  data: () => ({ 
-    drawer: false,
-  }),
-});
+const tutorialDialog = ref(false);
 </script>
 
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer">
-      <!--  -->
-    </v-navigation-drawer>
-
     <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
       <v-toolbar-title class="title">Cambodle</v-toolbar-title>
 
-      <v-btn icon>
+      <v-btn icon @click="tutorialDialog = true">
         <v-icon icon="mdi-help-circle-outline" />
-      </v-btn>
-      <v-btn icon>
-        <v-icon icon="mdi-poll" />
-      </v-btn>
-      <v-btn icon>
-        <v-icon icon="mdi-cog" />
       </v-btn>
     </v-app-bar>
 
@@ -39,6 +20,23 @@ export default defineComponent({
     </v-main>
 
     <FooterBar />
+
+    <v-dialog v-model="tutorialDialog" max-width="600">
+      <v-card title="How to Play">
+        <v-card-text>
+          <p>
+            Cambodle is a fun guessing game where you need to
+            <strong>identify the highlighted Cambodian province</strong>
+            of the day within six attempts. Enter the name of the
+            province you think is correct in the input box and submit your guess.
+          </p>
+          <p>Can you guess the correct province in six tries or less?</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn text="Close" variant="text" @click="tutorialDialog = false">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -51,5 +49,12 @@ export default defineComponent({
   letter-spacing: 0.01em;
   text-align: center;
   pointer-events: none;
+}
+
+.v-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 </style>

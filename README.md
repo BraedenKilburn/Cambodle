@@ -11,7 +11,6 @@ Every day, the highlighted province changes and gives the player a new opportuni
 - The buttons at the top of the page need to be implemented
   - For example, we should put a dark mode feature
   - We could put a hard mode with no combobox or lower guess allowance
-  - We definitely need a help page to explain the game
 - A leaderboard or statistics metric should be kept
 - Add basic unit tests
 - Implement user profiles to maintain stats

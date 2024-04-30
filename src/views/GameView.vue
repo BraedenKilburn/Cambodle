@@ -1,64 +1,54 @@
-<script lang="ts">
+<script setup lang="ts">
+import { ref, computed } from "vue";
 import GuessRow from "@/components/GuessRow.vue";
-import Provinces from "@/assets/data/ordered_provinces.json";
-import RandomizedProvinces from "@/assets/data/random_provinces.json";
+import OrderedProvinces from "@/assets/data/ordered_provinces";
+import RandomizedProvinces from "@/assets/data/random_provinces";
 
-interface IGameViewData {
-  guessesAllowed: number;
-  guessCount: number;
-  guessedProvince: string[];
-  guess: string | null;
-  solved: boolean;
-  provinces: string[];
+const GUESSES_ALLOWED = 6;
+const guessCount = ref(0);
+const guessedProvinces = ref(Array<string>());
+const guess = ref<string | null>(null);
+const solved = ref(false);
+const provinces = ref(OrderedProvinces);
+
+const answer = computed(() => {
+  const index = new Date().getDate() % 25;
+  return RandomizedProvinces.provinces[index];
+});
+
+const gameStatus = computed(() => {
+  return {
+    gameOver: solved.value || guessCount.value === GUESSES_ALLOWED,
+    outcome: guessCount.value === GUESSES_ALLOWED ? "Game Over" : "You Win!",
+  };
+});
+
+const imageSrc = computed(() => {
+  const provinceName = answer.value.imgSrc;
+  const imageType = gameStatus.value.gameOver ? "answer" : "empty";
+  return new URL(`/src/assets/images/${provinceName}_${imageType}.png`, import.meta.url).toString();
+});
+
+const hasRemainingGuesses = computed(() => guessCount.value < GUESSES_ALLOWED);
+
+function makeGuess() {
+  // Prevent submitting empty guesses
+  if (!guess.value) return;
+
+  // Update guessed provinces and increment guess count
+  guessedProvinces.value[guessCount.value] = guess.value;
+  guessCount.value++;
+
+  solved.value = guess.value === answer.value.name && hasRemainingGuesses.value;
+
+  // If the guess is incorrect and there are remaining guesses,
+  // remove the guessed province from the list of provinces
+  // and reset the guess value
+  if (!solved.value && hasRemainingGuesses.value) {
+    provinces.value = provinces.value.filter((province) => province !== guess.value);
+    guess.value = null;
+  }
 }
-
-export default {
-  name: "GameView",
-  components: {
-    GuessRow,
-  },
-  data(): IGameViewData {
-    return {
-      guessesAllowed: 6,
-      guessCount: 0,
-      guessedProvince: Array(6),
-      guess: null,
-      solved: false,
-      provinces: Provinces as string[],
-    };
-  },
-  computed: {
-    answer() {
-      const index = new Date().getDate() % 25;
-      return RandomizedProvinces.provinces[index];
-    },
-    disabled() {
-      if (!this.guess) return true;
-      return this.guessedProvince.includes(this.guess);
-    },
-    gameStatus() {
-      return {
-        gameOver: this.solved || this.guessCount === this.guessesAllowed,
-        outcome: this.guessCount === this.guessesAllowed ? "Game Over" : "You Win!",
-      };
-    },
-    imageSrc() {
-      const provinceName = this.answer.imgSrc;
-      const imageType = this.gameStatus.gameOver ? "answer" : "empty";
-      return new URL(`/src/assets/images/${provinceName}_${imageType}.png`, import.meta.url).toString();
-    },
-  },
-  methods: {
-    makeGuess() {
-      if (!this.guess) return;
-
-      this.guessedProvince[this.guessCount] = this.guess;
-      this.guessCount++;
-      
-      this.solved = (this.guess === this.answer.name && this.guessCount !== this.guessesAllowed) ? true : false;
-    },
-  },
-};
 </script>
 
 <template>
@@ -75,24 +65,28 @@ export default {
         </p>
       </div>
       <div class="guesses">
-        <GuessRow
-          v-for="(guess, index) in guessedProvince"
-          :key="index"
-          :answer="answer.name"
-          :guessed-province="guess"
-        />
+        <TransitionGroup name="list" tag="div">
+          <GuessRow
+            v-for="(guess, index) in guessedProvinces"
+            v-memo="[guess]"
+            :key="index"
+            :answer="answer.name"
+            :guessed-province="guess"
+          />
+        </TransitionGroup>
       </div>
       <div class="guess-submission mt-4">
         <v-combobox
           clearable
+          autocomplete="off"
           v-model="guess"
           id="combobox"
           label="Guess the province (e.g., Phnom Penh)"
-          variant="underlined"
+          variant="outlined"
           :items="provinces"
-          :disabled="guessCount === guessesAllowed || solved"
+          :disabled="guessCount === GUESSES_ALLOWED || solved"
         />
-        <v-btn color="success" :disabled="disabled" @click="makeGuess"
+        <v-btn color="success" :disabled="!guess" @click="makeGuess"
           >&#127472;&#127469; Submit Guess</v-btn
         >
       </div>
@@ -142,11 +136,31 @@ export default {
 
     .guesses {
       width: var(--width);
+
+      .list-move,
+      .list-enter-active,
+      .list-leave-active {
+        transition: all 0.5s ease;
+      }
+
+      .list-enter-from,
+      .list-leave-to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .list-leave-active {
+        position: absolute;
+      }
     }
 
     .guess-submission {
       width: var(--width);
       text-align: center;
+
+      .v-btn {
+        width: 100%;
+      }
     }
   }
 }
