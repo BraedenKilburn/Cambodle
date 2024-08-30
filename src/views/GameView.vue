@@ -124,13 +124,12 @@ function makeGuess() {
 
       span {
         color: red;
+        font-weight: bold;
+        font-size: 2rem;
 
         &.correct {
           color: green;
         }
-        
-        font-weight: bold;
-        font-size: 2rem;
       }
     }
 
