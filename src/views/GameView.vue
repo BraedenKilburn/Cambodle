@@ -12,9 +12,10 @@ const guess = ref<string | null>(null);
 const solved = ref(false);
 const provinces = ref(OrderedProvinces);
 
-const answer = computed(() => {
-  const index = new Date().getDate() % 25;
-  return RandomizedProvinces.provinces[index];
+type Province = typeof RandomizedProvinces.provinces[number];
+const answer = computed<Province>(() => {
+  const index = new Date().getDate() % RandomizedProvinces.provinces.length;
+  return RandomizedProvinces.provinces[index] as Province;
 });
 
 const gameStatus = computed(() => {
@@ -22,12 +23,6 @@ const gameStatus = computed(() => {
     gameOver: solved.value || guessCount.value === GUESSES_ALLOWED,
     outcome: guessCount.value === GUESSES_ALLOWED ? "Game Over" : "You Win!",
   };
-});
-
-const imageSrc = computed(() => {
-  const provinceName = answer.value.imgSrc;
-  const imageType = gameStatus.value.gameOver ? "answer" : "empty";
-  return new URL(`/src/assets/images/${provinceName}_${imageType}.png`, import.meta.url).toString();
 });
 
 const hasRemainingGuesses = computed(() => guessCount.value < GUESSES_ALLOWED);
@@ -55,7 +50,7 @@ function makeGuess() {
 <template>
   <v-container class="game-container">
     <div class="svg-container">
-      <CambodiaMap />
+      <CambodiaMap :answer="answer.name" />
     </div>
 
     <div class="gameplay-container">
