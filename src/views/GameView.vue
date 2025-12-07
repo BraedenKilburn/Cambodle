@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import GuessRow from "@/components/GuessRow.vue";
 import OrderedProvinces from "@/assets/data/ordered_provinces";
 import RandomizedProvinces from "@/assets/data/random_provinces";
+import CambodiaMap from "@/components/CambodiaMap.vue";
 
 const GUESSES_ALLOWED = 6;
 const guessCount = ref(0);
@@ -53,8 +54,8 @@ function makeGuess() {
 
 <template>
   <v-container class="game-container">
-    <div class="image-container">
-      <img :src="imageSrc" alt="Cambodia Map">
+    <div class="svg-container">
+      <CambodiaMap />
     </div>
 
     <div class="gameplay-container">
@@ -102,14 +103,10 @@ function makeGuess() {
   flex-direction: column;
   align-items: center;
   padding-top: 0;
+  max-width: 100%;
 
-  .image-container {
-    margin-bottom: 10px;
-
-    img {
-      width: 300px;
-      aspect-ratio: 1 / 1;
-    }
+  .svg-container {
+    width: 100%;
   }
 
   .gameplay-container {
@@ -167,6 +164,10 @@ function makeGuess() {
 @media screen and (min-width: 600px) {
   .game-container {
     --width: 400px;
+
+    .svg-container {
+      width: 50%;
+    }
   }
 }
 
@@ -174,13 +175,7 @@ function makeGuess() {
   .game-container {
     height: 100%;
     flex-direction: row;
-    justify-content: space-around;
-
-    .image-container {
-      img {
-        width: 500px;
-      }
-    }
+    justify-content: center;
   }
 }
 </style>
