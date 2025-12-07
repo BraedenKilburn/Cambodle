@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { mdiHelpCircleOutline } from "@mdi/js";
 import FooterBar from "@/components/FooterBar.vue";
 
 const tutorialDialog = ref(false);
@@ -10,9 +11,7 @@ const tutorialDialog = ref(false);
     <v-app-bar>
       <v-toolbar-title class="title">Cambodle</v-toolbar-title>
 
-      <v-btn icon @click="tutorialDialog = true">
-        <v-icon icon="mdi-help-circle-outline" />
-      </v-btn>
+      <v-btn :icon="mdiHelpCircleOutline" @click="tutorialDialog = true" />
     </v-app-bar>
 
     <v-main>
